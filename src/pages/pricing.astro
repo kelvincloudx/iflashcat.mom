@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import PricingSection from '../components/PricingSection.astro';
+import PricingTable from '../components/PricingTable.astro';
+import BillingNotice from '../components/BillingNotice.astro';
+import { SITE } from '../data/site';
+
+const breadcrumbItems = [
+  { name: '套餐价格', url: '/pricing/' },
+];
+
+const pageTitle = '闪电猫 SpeedCAT 套餐价格与付款周期全览｜iflashcat.mom';
+const pageDescription = '详细汇总闪电猫 SpeedCAT 迷你猫、闪电猫、霹雳猫、雷神猫及年付专属流星猫、飞天猫公开参考价格，对比 19 个周期选项与流量重置规则。';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: SITE.domain,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: '套餐价格',
+      item: `${SITE.domain}/pricing/`,
+    },
+  ],
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  schema={breadcrumbSchema}
+>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="pricing-page-header">
+    <div class="container text-center">
+      <h1 class="page-title">闪电猫 SpeedCAT 套餐价格与付款周期</h1>
+      <p class="page-subtitle">
+        公开资料参考价格全览：包含 4 种常规按月重置套餐（16 个周期价格）及 3 种年付专属套餐，数据源统一透明。
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <PricingSection isPage={true} />
+
+  <!-- Detailed Feature & Cycle Comparison Table -->
+  <section class="table-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>⚡</span> 参数横向比对
+        </div>
+        <h2 class="section-title">全套餐规格横向对比一览表</h2>
+        <p class="section-desc">
+          清晰对比 7 款套餐在月付、季付、半年付、年付下的价格表现与流量重置机制。
+        </p>
+      </div>
+
+      <PricingTable />
+    </div>
+  </section>
+
+  <!-- Billing Mechanism Details -->
+  <BillingNotice />
+</Layout>
+
+<style>
+  .pricing-page-header {
+    padding: 3rem 0 1rem 0;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .table-section {
+    padding: 2rem 0 4rem 0;
+  }
+</style>

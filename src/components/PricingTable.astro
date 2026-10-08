@@ -1,0 +1,224 @@
+---
+import {
+  REGULAR_PLANS,
+  ANNUAL_PLANS,
+  AFF_LINK,
+  AFF_REL,
+  AFF_TARGET,
+  AFF_BUTTON_TEXT,
+  PRICE_DISCLAIMER,
+} from '../data/plans';
+---
+
+<div class="pricing-table-container">
+  <div class="table-responsive">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>套餐名称</th>
+          <th>流量规则</th>
+          <th>月付</th>
+          <th>季付</th>
+          <th>半年付</th>
+          <th>年付</th>
+          <th>重置方式</th>
+          <th>选购入口</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Regular Plans -->
+        {REGULAR_PLANS.map((plan) => (
+          <tr>
+            <td>
+              <div class="table-plan-name">
+                <strong>{plan.name}</strong>
+                {plan.tag && <span class="badge badge-cyan">{plan.tag}</span>}
+              </div>
+            </td>
+            <td>
+              <span class="traffic-text">{plan.monthlyTraffic}</span>
+            </td>
+            <td><strong>¥{plan.prices.find(p => p.cycle === 'monthly')?.price}</strong></td>
+            <td><strong>¥{plan.prices.find(p => p.cycle === 'quarterly')?.price}</strong></td>
+            <td><strong>¥{plan.prices.find(p => p.cycle === 'halfYearly')?.price}</strong></td>
+            <td><strong class="highlight-year">¥{plan.prices.find(p => p.cycle === 'yearly')?.price}</strong></td>
+            <td><span class="reset-rule">按月自动清零重置</span></td>
+            <td>
+              <a
+                href={AFF_LINK}
+                target={AFF_TARGET}
+                rel={AFF_REL}
+                class="btn btn-primary btn-sm table-cta"
+              >
+                {AFF_BUTTON_TEXT}
+              </a>
+            </td>
+          </tr>
+        ))}
+
+        <!-- Section Divider in Table -->
+        <tr class="table-divider-row">
+          <td colspan="8">
+            <strong>年付专属套餐（整年总额度或特惠周期）</strong>
+          </td>
+        </tr>
+
+        <!-- Annual Exclusive Plans -->
+        {ANNUAL_PLANS.map((plan) => (
+          <tr class="annual-table-row">
+            <td>
+              <div class="table-plan-name">
+                <strong class="text-yellow">{plan.name}</strong>
+                {plan.tag && <span class="badge badge-yellow">{plan.tag}</span>}
+              </div>
+              {plan.statusNotice && (
+                <div class="table-sub-notice">⚠️ {plan.statusNotice}</div>
+              )}
+            </td>
+            <td>
+              <span class="traffic-text-yellow">{plan.annualTraffic}</span>
+            </td>
+            <td class="text-na">—</td>
+            <td class="text-na">—</td>
+            <td class="text-na">—</td>
+            <td><strong class="highlight-year-yellow">¥{plan.prices[0].price}</strong></td>
+            <td>
+              <span class="reset-rule-annual">
+                {plan.id === 'special-annual' ? '每30天发放50GB' : '全年不按月清零'}
+              </span>
+            </td>
+            <td>
+              <a
+                href={AFF_LINK}
+                target={AFF_TARGET}
+                rel={AFF_REL}
+                class="btn btn-secondary btn-sm table-cta"
+              >
+                {AFF_BUTTON_TEXT}
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="disclaimer-box table-disclaimer">
+    <p>{PRICE_DISCLAIMER}</p>
+  </div>
+</div>
+
+<style>
+  .pricing-table-container {
+    margin: 2.5rem 0;
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-md);
+    background: #111827;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 1.1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: middle;
+  }
+
+  .comparison-table th {
+    background: rgba(11, 16, 32, 0.9);
+    color: var(--color-cyan);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .table-plan-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .table-plan-name strong {
+    font-size: 1.05rem;
+    color: #F8FAFC;
+  }
+
+  .table-sub-notice {
+    font-size: 0.72rem;
+    color: var(--color-yellow);
+    margin-top: 0.25rem;
+  }
+
+  .traffic-text {
+    font-weight: 700;
+    color: var(--color-cyan);
+  }
+
+  .traffic-text-yellow {
+    font-weight: 700;
+    color: var(--color-yellow);
+  }
+
+  .highlight-year {
+    color: #38BDF8;
+  }
+
+  .highlight-year-yellow {
+    color: #FFD43B;
+  }
+
+  .text-yellow {
+    color: var(--color-yellow) !important;
+  }
+
+  .text-na {
+    color: var(--color-text-dim);
+  }
+
+  .reset-rule {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .reset-rule-annual {
+    font-size: 0.8rem;
+    color: var(--color-yellow);
+    font-weight: 600;
+  }
+
+  .table-divider-row td {
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--color-cyan);
+    font-size: 0.88rem;
+    padding: 0.75rem 1.25rem;
+    border-top: 2px solid rgba(56, 189, 248, 0.2);
+    border-bottom: 2px solid rgba(56, 189, 248, 0.2);
+  }
+
+  .annual-table-row {
+    background: rgba(255, 212, 59, 0.02);
+  }
+
+  .table-cta {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .table-disclaimer {
+    margin-top: 1.25rem;
+  }
+</style>

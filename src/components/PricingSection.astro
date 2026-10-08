@@ -1,0 +1,409 @@
+---
+import {
+  REGULAR_PLANS,
+  ANNUAL_PLANS,
+  AFF_LINK,
+  AFF_REL,
+  AFF_TARGET,
+  AFF_BUTTON_TEXT,
+  PRICE_DISCLAIMER,
+} from '../data/plans';
+
+interface Props {
+  isPage?: boolean;
+}
+
+const { isPage = false } = Astro.props;
+---
+
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 公开参考套餐体系
+      </div>
+      <h2 class="section-title">
+        {isPage ? '闪电猫 SpeedCAT 全部套餐价格与付款周期' : '闪电猫 SpeedCAT 套餐参考价格表'}
+      </h2>
+      <p class="section-desc">
+        完整列出 4 种常规按月重置套餐（16 个周期价格）及 3 种年付专属套餐，拒绝虚构折扣与隐藏收费。
+      </p>
+    </div>
+
+    <!-- Regular Plans Part (4 Plans, 4 Cycles Each = 16 Options) -->
+    <div class="pricing-block">
+      <div class="block-title-row">
+        <h3 class="block-title">
+          <span class="title-bullet">■</span>
+          常规按月重置套餐（支持月付 / 季付 / 半年付 / 年付）
+        </h3>
+        <span class="block-badge">共 4 款 · 16 个价格选项</span>
+      </div>
+
+      <div class="plans-grid regular-grid">
+        {REGULAR_PLANS.map((plan) => (
+          <div class="card plan-card" id={`plan-${plan.id}`}>
+            {plan.tag && <div class="plan-tag-badge">{plan.tag}</div>}
+            <div class="plan-header">
+              <h4 class="plan-name">{plan.name}</h4>
+              <div class="plan-traffic-highlight">{plan.monthlyTraffic}</div>
+              <p class="plan-traffic-rule">{plan.trafficRule}</p>
+            </div>
+
+            <p class="plan-desc">{plan.description}</p>
+
+            <div class="plan-cycles-table">
+              <div class="cycle-table-head">
+                <span>周期</span>
+                <span>参考金额</span>
+              </div>
+              {plan.prices.map((p) => (
+                <div class="cycle-row">
+                  <span class="cycle-name">{p.cycleName}</span>
+                  <span class="cycle-price">{p.periodText}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="plan-btn-wrap">
+              <a
+                href={AFF_LINK}
+                target={AFF_TARGET}
+                rel={AFF_REL}
+                class="btn btn-primary btn-block plan-btn"
+              >
+                {AFF_BUTTON_TEXT}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Annual Exclusive Plans Part (3 Plans, 3 Options) -->
+    <div class="pricing-block annual-block">
+      <div class="block-title-row">
+        <h3 class="block-title">
+          <span class="title-bullet bullet-yellow">■</span>
+          年付专属套餐（特惠小包及整年总流量不按月清零）
+        </h3>
+        <span class="block-badge badge-yellow-text">共 3 款 · 3 个价格选项</span>
+      </div>
+
+      <div class="plans-grid annual-grid">
+        {ANNUAL_PLANS.map((plan) => (
+          <div class="card plan-card annual-card" id={`plan-${plan.id}`}>
+            {plan.tag && <div class="plan-tag-badge annual-tag">{plan.tag}</div>}
+            <div class="plan-header">
+              <h4 class="plan-name">{plan.name}</h4>
+              <div class="plan-traffic-highlight annual-highlight">{plan.annualTraffic}</div>
+              <p class="plan-traffic-rule">{plan.trafficRule}</p>
+            </div>
+
+            <p class="plan-desc">{plan.description}</p>
+
+            {plan.statusNotice && (
+              <div class="status-notice-tag">
+                ⚠️ {plan.statusNotice}
+              </div>
+            )}
+
+            <div class="annual-price-box">
+              <div class="price-label">年付固定参考价</div>
+              <div class="price-value">{plan.prices[0].periodText}</div>
+            </div>
+
+            <div class="plan-btn-wrap">
+              <a
+                href={AFF_LINK}
+                target={AFF_TARGET}
+                rel={AFF_REL}
+                class="btn btn-secondary btn-block plan-btn"
+              >
+                {AFF_BUTTON_TEXT}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Transparent Price Disclaimer Note -->
+    <div class="disclaimer-box pricing-disclaimer">
+      <div class="disclaimer-header">
+        <span class="disclaimer-icon">⚠️</span>
+        <strong>价格与销售关系透明度说明</strong>
+      </div>
+      <p>{PRICE_DISCLAIMER}</p>
+    </div>
+
+    <!-- Link to deep comparison if on homepage -->
+    {!isPage && (
+      <div class="pricing-more-footer">
+        <a href="/pricing/" class="btn btn-outline">
+          查看完整套餐参数对比表与选购细节 →
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .pricing-section {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.4) 0%, rgba(11, 16, 32, 0.8) 100%);
+  }
+
+  .pricing-block {
+    margin-bottom: 3.5rem;
+  }
+
+  .block-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .block-title {
+    font-size: 1.3rem;
+    color: var(--color-text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .title-bullet {
+    color: var(--color-cyan);
+    font-size: 0.9em;
+  }
+
+  .bullet-yellow {
+    color: var(--color-yellow);
+  }
+
+  .block-badge {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-cyan);
+    background: rgba(56, 189, 248, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+  }
+
+  .badge-yellow-text {
+    color: var(--color-yellow);
+    background: rgba(255, 212, 59, 0.1);
+    border-color: rgba(255, 212, 59, 0.2);
+  }
+
+  .plans-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .regular-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .annual-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .plan-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.4rem;
+    background: #111A2E;
+    border: 1px solid rgba(56, 189, 248, 0.18);
+    position: relative;
+  }
+
+  .annual-card {
+    background: #131E33;
+    border-color: rgba(255, 212, 59, 0.22);
+  }
+
+  .plan-tag-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+
+  .annual-tag {
+    color: var(--color-yellow);
+    background: rgba(255, 212, 59, 0.15);
+    border-color: rgba(255, 212, 59, 0.3);
+  }
+
+  .plan-header {
+    margin-bottom: 1rem;
+  }
+
+  .plan-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #F8FAFC;
+    margin-bottom: 0.35rem;
+  }
+
+  .plan-traffic-highlight {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-cyan);
+    margin-bottom: 0.35rem;
+  }
+
+  .annual-highlight {
+    color: var(--color-yellow);
+  }
+
+  .plan-traffic-rule {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    line-height: 1.4;
+    min-height: 2.8em;
+  }
+
+  .plan-desc {
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    min-height: 3.2em;
+  }
+
+  .plan-cycles-table {
+    background: rgba(11, 16, 32, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cycle-table-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-dim);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cycle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.04);
+  }
+
+  .cycle-row:last-child {
+    border-bottom: none;
+  }
+
+  .cycle-name {
+    color: var(--color-text-muted);
+  }
+
+  .cycle-price {
+    font-weight: 700;
+    color: #F8FAFC;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .annual-price-box {
+    background: rgba(11, 16, 32, 0.7);
+    border: 1px solid rgba(255, 212, 59, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-label {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    margin-bottom: 0.3rem;
+  }
+
+  .price-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-yellow);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-notice-tag {
+    font-size: 0.78rem;
+    color: var(--color-yellow);
+    background: rgba(255, 212, 59, 0.1);
+    border: 1px solid rgba(255, 212, 59, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .plan-btn-wrap {
+    margin-top: auto;
+  }
+
+  .plan-btn {
+    font-size: 0.92rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .pricing-disclaimer {
+    margin-top: 1rem;
+  }
+
+  .disclaimer-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-yellow);
+    margin-bottom: 0.4rem;
+    font-size: 0.92rem;
+  }
+
+  .pricing-more-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 1120px) {
+    .regular-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .annual-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .regular-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .annual-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

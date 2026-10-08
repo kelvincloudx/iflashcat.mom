@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import BrandIntro from '../components/BrandIntro.astro';
+import PricingSection from '../components/PricingSection.astro';
+import BillingNotice from '../components/BillingNotice.astro';
+import TutorialEntries from '../components/TutorialEntries.astro';
+import NodeKnowledge from '../components/NodeKnowledge.astro';
+import UserConsiderations from '../components/UserConsiderations.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { SITE } from '../data/site';
+import { FAQ_LIST } from '../data/faq';
+
+// FAQPage structured data
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_LIST.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question.replace(/^\d+\.\s*/, ''),
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={SITE.title}
+  description={SITE.description}
+  schema={faqSchema}
+>
+  <!-- 1. Hero 首屏 -->
+  <Hero />
+
+  <!-- 2. 闪电猫品牌信息 -->
+  <BrandIntro />
+
+  <!-- 3. 六种套餐价格（完整展示 7 种公开参考套餐、19 个价格选项） -->
+  <PricingSection />
+
+  <!-- 4. 月付与年付说明 -->
+  <BillingNotice />
+
+  <!-- 5. 客户端教程入口与七篇文章入口 -->
+  <TutorialEntries />
+
+  <!-- 6. 节点使用知识 -->
+  <NodeKnowledge />
+
+  <!-- 7. 用户选购关注点 -->
+  <UserConsiderations />
+
+  <!-- 8. FAQ 常见问题 -->
+  <FaqSection />
+</Layout>

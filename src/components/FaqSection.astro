@@ -1,0 +1,163 @@
+---
+import { FAQ_LIST } from '../data/faq';
+
+interface Props {
+  isPage?: boolean;
+}
+
+const { isPage = false } = Astro.props;
+---
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 答疑解惑
+      </div>
+      <h2 class="section-title">
+        {isPage ? '闪电猫 SpeedCAT 常见问题深度解答 (FAQ)' : '闪电猫常见问题解答 (FAQ)'}
+      </h2>
+      <p class="section-desc">
+        汇总新老用户最关心的 12 个高频问题，涵盖参考套餐差异、流量规则、客户端导入与网络排障。
+      </p>
+    </div>
+
+    <div class="faq-list">
+      {FAQ_LIST.map((item, index) => (
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-q-badge">Q</span>
+            <h3 class="faq-q-text">{item.question}</h3>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-a-text">{item.answer}</p>
+            {item.relatedLink && (
+              <div class="faq-related-link">
+                <span class="related-prefix">相关指引：</span>
+                <a href={item.relatedLink.href}>{item.relatedLink.text} →</a>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {!isPage && (
+      <div class="faq-footer-action">
+        <a href="/faq/" class="btn btn-outline">
+          查看完整常见问题索引专页 →
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.5) 0%, #0B1020 100%);
+    padding-bottom: 5rem;
+  }
+
+  .faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .faq-item {
+    background: #111827;
+    border: 1px solid rgba(56, 189, 248, 0.16);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 2rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .faq-item:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-q-badge {
+    background: rgba(255, 212, 59, 0.15);
+    color: var(--color-yellow);
+    border: 1px solid rgba(255, 212, 59, 0.3);
+    font-weight: 800;
+    font-size: 0.85rem;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .faq-q-text {
+    font-size: 1.18rem;
+    color: #F8FAFC;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .faq-answer {
+    padding-left: 2.5rem;
+  }
+
+  .faq-a-text {
+    font-size: 0.95rem;
+    color: #CBD5E1;
+    line-height: 1.8;
+    margin: 0 0 0.85rem 0;
+  }
+
+  .faq-related-link {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .related-prefix {
+    color: var(--color-text-dim);
+  }
+
+  .faq-related-link a {
+    color: var(--color-cyan);
+    font-weight: 600;
+  }
+
+  .faq-related-link a:hover {
+    color: #7DD3FC;
+    text-decoration: underline;
+  }
+
+  .faq-footer-action {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 640px) {
+    .faq-item {
+      padding: 1.25rem 1.25rem;
+    }
+
+    .faq-answer {
+      padding-left: 0;
+      margin-top: 0.75rem;
+    }
+
+    .faq-q-text {
+      font-size: 1.05rem;
+    }
+  }
+</style>

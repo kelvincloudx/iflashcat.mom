@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FaqSection from '../components/FaqSection.astro';
+import UserConsiderations from '../components/UserConsiderations.astro';
+import { SITE } from '../data/site';
+import { FAQ_LIST } from '../data/faq';
+
+const breadcrumbItems = [
+  { name: '常见问题', url: '/faq/' },
+];
+
+const pageTitle = '闪电猫 SpeedCAT 常见问题解答与连接排障指南｜iflashcat.mom';
+const pageDescription = '汇总闪电猫 SpeedCAT 套餐选择、最低月付、流星猫与飞天猫流量规则、ClashParty 订阅导入与节点超时排障等高频疑问解答。';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: SITE.domain,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: '常见问题',
+      item: `${SITE.domain}/faq/`,
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_LIST.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question.replace(/^\d+\.\s*/, ''),
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  schema={[breadcrumbSchema, faqSchema]}
+>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="faq-page-header">
+    <div class="container text-center">
+      <h1 class="page-title">闪电猫 SpeedCAT 常见问题解答 (FAQ)</h1>
+      <p class="page-subtitle">
+        针对新用户入门、套餐计费特性、多平台客户端导入及常见连接异常提供详实解答。
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section with all items -->
+  <FaqSection isPage={true} />
+
+  <!-- User Considerations -->
+  <UserConsiderations />
+</Layout>
+
+<style>
+  .faq-page-header {
+    padding: 3rem 0 1rem 0;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+</style>

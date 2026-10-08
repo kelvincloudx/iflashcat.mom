@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import TutorialEntries from '../../components/TutorialEntries.astro';
+import { SITE } from '../../data/site';
+
+const breadcrumbItems = [
+  { name: '使用教程', url: '/guides/' },
+];
+
+const pageTitle = '闪电猫 SpeedCAT 使用教程与技术指南索引｜iflashcat.mom';
+const pageDescription = '闪电猫 SpeedCAT 教程索引库，收录 7 篇原创指南：套餐选购对比、Windows 与 ClashParty 客户端导入、手机端适配、节点延迟与常见排错技巧。';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: SITE.domain,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: '使用教程',
+      item: `${SITE.domain}/guides/`,
+    },
+  ],
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  schema={breadcrumbSchema}
+>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="guides-page-header">
+    <div class="container text-center">
+      <h1 class="page-title">闪电猫 SpeedCAT 使用教程与知识指南</h1>
+      <p class="page-subtitle">
+        针对日常使用中的真实需求，提供系统、严谨、步骤详尽的单品牌技术文档与使用手册。
+      </p>
+    </div>
+  </section>
+
+  <!-- Guides List Section -->
+  <TutorialEntries isListPage={true} />
+</Layout>
+
+<style>
+  .guides-page-header {
+    padding: 3rem 0 1rem 0;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+</style>

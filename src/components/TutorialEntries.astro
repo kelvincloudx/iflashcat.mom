@@ -1,0 +1,205 @@
+---
+export interface GuideSummary {
+  title: string;
+  url: string;
+  description: string;
+  category: string;
+  readTime: string;
+}
+
+export const GUIDES: GuideSummary[] = [
+  {
+    title: '闪电猫 SpeedCAT 套餐价格完整介绍：六种套餐如何选择？',
+    url: '/guides/speedcat-plans/',
+    description: '全面剖析 4 种常规按月重置套餐与 2 种年付专属套餐，从月付折算、流量需求到人群画像提供科学选购思路。',
+    category: '套餐解读',
+    readTime: '7 分钟',
+  },
+  {
+    title: '闪电猫订阅使用教程：Windows 客户端配置指南',
+    url: '/guides/speedcat-windows/',
+    description: '针对 Windows 系统用户的标准配置教程，详解客户端安全获取渠道、订阅 URL 导入、规则分流模式与时钟排错。',
+    category: '客户端教程',
+    readTime: '8 分钟',
+  },
+  {
+    title: '闪电猫 ClashParty 使用教程：订阅导入与节点切换',
+    url: '/guides/speedcat-clashparty/',
+    description: '轻量桌面工具 ClashParty 专享实操手册，涵盖版本兼容依赖、远程订阅拉取、节点策略组切换及系统代理维护。',
+    category: '客户端教程',
+    readTime: '7 分钟',
+  },
+  {
+    title: '闪电猫节点使用指南：延迟、速度与线路选择',
+    url: '/guides/speedcat-nodes/',
+    description: '深入解析握手延迟（Ping）与吞吐带宽（Mbps）的本质差别，分析晚高峰拥堵成因与港台日新美节点选路策略。',
+    category: '技术科普',
+    readTime: '8 分钟',
+  },
+  {
+    title: '闪电猫套餐流量怎么计算？月度套餐与年度套餐说明',
+    url: '/guides/speedcat-data/',
+    description: '量化 1080P/4K 视频与日常办公的 GB 消耗模型，深度厘清月度清零与流星猫、飞天猫全年总流量资金池的差异。',
+    category: '流量指南',
+    readTime: '7 分钟',
+  },
+  {
+    title: '闪电猫手机使用教程：Android 与 iOS 配置说明',
+    url: '/guides/speedcat-mobile/',
+    description: '移动端设备全方位指引，涵盖开源 APK 安全渠道、iOS 外区应用获取、移动蜂窝与 Wi-Fi 切换及电池保活优化。',
+    category: '移动教程',
+    readTime: '8 分钟',
+  },
+  {
+    title: '闪电猫常见连接问题：订阅失败、节点无法连接如何解决？',
+    url: '/guides/speedcat-troubleshooting/',
+    description: '归纳高频连接故障场景，包括订阅 URL 拦截、YAML 解析报错、系统时间差导致的 TLS 握手断联与标准五步排查法。',
+    category: '故障排错',
+    readTime: '8 分钟',
+  },
+];
+
+interface Props {
+  isListPage?: boolean;
+}
+
+const { isListPage = false } = Astro.props;
+---
+
+<section class="tutorials-section" id="guides">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 原创教程与知识库
+      </div>
+      <h2 class="section-title">
+        {isListPage ? '闪电猫 SpeedCAT 使用教程与知识索引' : '闪电猫实用教程与知识中心'}
+      </h2>
+      <p class="section-desc">
+        全站精选 7 篇原创深度技术文章，覆盖套餐选择、多端客户端配置、节点网络知识及连接排障。
+      </p>
+    </div>
+
+    <div class="guides-grid">
+      {GUIDES.map((item, index) => (
+        <article class="card guide-card">
+          <div class="guide-meta-top">
+            <span class="badge badge-cyan">{item.category}</span>
+            <span class="guide-read-time">⏱️ {item.readTime}</span>
+          </div>
+
+          <h3 class="guide-title">
+            <a href={item.url}>{item.title}</a>
+          </h3>
+
+          <p class="guide-desc">{item.description}</p>
+
+          <div class="guide-footer">
+            <a href={item.url} class="guide-read-link">
+              阅读全文
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tutorials-section {
+    background: linear-gradient(180deg, rgba(11, 16, 32, 0.8) 0%, rgba(17, 24, 39, 0.5) 100%);
+  }
+
+  .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  .guide-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    background: #111827;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .guide-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 8px 30px rgba(56, 189, 248, 0.12);
+  }
+
+  .guide-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .guide-read-time {
+    font-size: 0.78rem;
+    color: var(--color-text-dim);
+  }
+
+  .guide-title {
+    font-size: 1.15rem;
+    line-height: 1.45;
+    margin-bottom: 0.85rem;
+  }
+
+  .guide-title a {
+    color: #F8FAFC;
+    transition: color var(--transition-fast);
+  }
+
+  .guide-title a:hover {
+    color: var(--color-cyan);
+  }
+
+  .guide-desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .guide-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .guide-read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-cyan);
+    transition: gap var(--transition-fast);
+  }
+
+  .guide-read-link:hover {
+    gap: 0.65rem;
+    color: #7DD3FC;
+  }
+
+  @media (max-width: 1024px) {
+    .guides-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .guides-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

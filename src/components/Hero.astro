@@ -1,0 +1,256 @@
+---
+import { SITE } from '../data/site';
+import { AFF_LINK, AFF_REL, AFF_TARGET } from '../data/plans';
+---
+
+<section class="hero-section">
+  <!-- Decorative lightning SVG background paths -->
+  <div class="hero-bg-accent" aria-hidden="true">
+    <svg class="lightning-svg" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 0L250 220L200 240L380 480L310 500L450 600" stroke="rgba(56, 189, 248, 0.15)" stroke-width="2" stroke-dasharray="8 8" />
+      <path d="M1050 0L950 200L1000 230L820 460L880 480L750 600" stroke="rgba(255, 212, 59, 0.12)" stroke-width="2" stroke-dasharray="8 8" />
+      <circle cx="200" cy="240" r="120" fill="rgba(56, 189, 248, 0.05)" filter="blur(60px)" />
+      <circle cx="1000" cy="230" r="140" fill="rgba(255, 212, 59, 0.04)" filter="blur(70px)" />
+    </svg>
+  </div>
+
+  <div class="container hero-container">
+    <div class="hero-badge">
+      <span class="badge-icon">⚡</span>
+      <span class="badge-text">单品牌服务说明与公开套餐资料</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-brand">闪电猫 SpeedCAT</span>
+      <span class="title-main">套餐价格与节点使用指南</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      {SITE.heroSubtitle}
+    </p>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary hero-btn-main">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 6v6l4 2"></path>
+        </svg>
+        查看套餐价格
+      </a>
+
+      <a
+        href={AFF_LINK}
+        target={AFF_TARGET}
+        rel={AFF_REL}
+        class="btn btn-secondary hero-btn-sub"
+      >
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        前往订阅平台
+      </a>
+    </div>
+
+    <div class="hero-highlights">
+      <div class="highlight-item">
+        <div class="highlight-val">7 种</div>
+        <div class="highlight-lbl">公开参考套餐</div>
+      </div>
+      <div class="highlight-divider"></div>
+      <div class="highlight-item">
+        <div class="highlight-val">19 个</div>
+        <div class="highlight-lbl">付款周期选项</div>
+      </div>
+      <div class="highlight-divider"></div>
+      <div class="highlight-item">
+        <div class="highlight-val">7 篇</div>
+        <div class="highlight-lbl">配置与排障指南</div>
+      </div>
+      <div class="highlight-divider"></div>
+      <div class="highlight-item">
+        <div class="highlight-val">100%</div>
+        <div class="highlight-lbl">单品牌原创解读</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding: 5.5rem 0 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-accent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .lightning-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-icon {
+    font-size: 0.9rem;
+  }
+
+  .badge-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-cyan);
+    letter-spacing: 0.03em;
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .title-brand {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--color-yellow);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .title-main {
+    font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    background: linear-gradient(180deg, #FFFFFF 20%, #CBD5E1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 680px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .hero-btn-main {
+    padding: 0.9rem 2.2rem;
+    font-size: 1.05rem;
+  }
+
+  .hero-btn-sub {
+    padding: 0.9rem 2.2rem;
+    font-size: 1.05rem;
+  }
+
+  .hero-highlights {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.25rem 2rem;
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    flex-wrap: wrap;
+  }
+
+  .highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .highlight-val {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-cyan);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .highlight-lbl {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .highlight-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    .hero-section {
+      padding: 3.5rem 0 2.5rem 0;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .hero-btn-main, .hero-btn-sub {
+      width: 100%;
+    }
+
+    .hero-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      width: 100%;
+    }
+
+    .highlight-divider {
+      display: none;
+    }
+  }
+</style>

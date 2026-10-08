@@ -1,0 +1,5 @@
+# Robots.txt for iflashcat.mom
+User-agent: *
+Allow: /
+
+Sitemap: https://iflashcat.mom/sitemap.xml

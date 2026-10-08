@@ -1,0 +1,190 @@
+---
+---
+
+<section class="billing-notice-section" id="billing-rules">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 计费机制深度解析
+      </div>
+      <h2 class="section-title">月付与年付机制说明：选购前必须了解的规则</h2>
+      <p class="section-desc">
+        搞清按月清零与整年总流量资金池的本质差别，避免购买后因流量认知误差产生困扰。
+      </p>
+    </div>
+
+    <div class="rules-grid">
+      <div class="card rule-card">
+        <div class="rule-badge badge-cyan">机制一</div>
+        <h3 class="rule-title">常规套餐：按月清零重置规则</h3>
+        <p class="rule-desc">
+          涵盖「迷你猫、闪电猫、霹雳猫、雷神猫」四档常规套餐。不论您一次性支付了 1 个月、3 个月、6 个月还是 12 个月的费用，其流量配额均为**按账单月逐月发放**。
+        </p>
+        <ul class="rule-list">
+          <li><strong>未用完不结转</strong>：例如闪电猫每月 200GB，若本月仅消耗 80GB，剩余的 120GB 会在月末自动清零，不会累积至下月。</li>
+          <li><strong>超额后限制</strong>：当月流量用尽后将暂停代理中转或受到速率限制，需等待下个账单月开始或在平台重置。</li>
+          <li><strong>适用建议</strong>：适合每月办公、娱乐流量消耗非常均衡的稳定型用户。</li>
+        </ul>
+      </div>
+
+      <div class="card rule-card card-annual-focus">
+        <div class="rule-badge badge-yellow">机制二</div>
+        <h3 class="rule-title">年付专属套餐：全年资金池不按月清零</h3>
+        <p class="rule-desc">
+          涵盖「流星猫（600GB/年）」与「飞天猫（5000GB/年）」。这两款属于高灵活性年付专属方案，核心优势在于**整年额度自由支配**。
+        </p>
+        <ul class="rule-list">
+          <li><strong>无月度限额</strong>：系统在开通时一次性赋予整年额度，不会将 600GB 硬性切分为“每月 50GB”。</li>
+          <li><strong>弹性按需消耗</strong>：在出差、假期或项目攻坚月可以使用 150GB，在轻量月仅用 10GB，剩余流量在 365 天有效期内始终可用。</li>
+          <li><strong>适用建议</strong>：适合使用频次波动大、经常出差、或作为跨设备长期备用网络的用户。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="purchase-checklist">
+      <h3 class="checklist-title">📋 购买前关键核对清单</h3>
+      <div class="checklist-items">
+        <div class="checklist-col">
+          <div class="item-head">1. 核对客户端是否已就绪</div>
+          <p class="item-text">
+            在开通前请确保本地电脑（Windows）或手机（Android/iOS）已安装好支持标准通用协议的客户端应用。
+          </p>
+        </div>
+        <div class="checklist-col">
+          <div class="item-head">2. 优先建议月付轻度体验</div>
+          <p class="item-text">
+            初次使用建议优先开通迷你猫或闪电猫的单月账单，在实际本地网络环境下检验延迟与连通率，满意后再考虑升级长周期。
+          </p>
+        </div>
+        <div class="checklist-col">
+          <div class="item-head">3. 认准结算平台实时规格</div>
+          <p class="item-text">
+            本站数据为历史公开参考，购买页面可能对部分套餐、付款方式或优惠做出临时调整，付款前以最终收银台信息为准。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .billing-notice-section {
+    background: #0B1020;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .rule-card {
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-annual-focus {
+    border-color: rgba(255, 212, 59, 0.25);
+  }
+
+  .rule-badge {
+    align-self: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .rule-title {
+    font-size: 1.3rem;
+    color: #F8FAFC;
+    margin-bottom: 0.75rem;
+  }
+
+  .rule-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .rule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .rule-list li {
+    font-size: 0.9rem;
+    color: #CBD5E1;
+    line-height: 1.6;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .rule-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-cyan);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .card-annual-focus .rule-list li::before {
+    color: var(--color-yellow);
+  }
+
+  .purchase-checklist {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.25rem;
+  }
+
+  .checklist-title {
+    font-size: 1.2rem;
+    color: var(--color-text-main);
+    margin-bottom: 1.5rem;
+  }
+
+  .checklist-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .checklist-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .item-head {
+    font-weight: 700;
+    color: var(--color-cyan);
+    font-size: 1rem;
+  }
+
+  .item-text {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .rules-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .checklist-items {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>

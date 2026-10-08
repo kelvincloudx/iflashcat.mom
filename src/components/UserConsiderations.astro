@@ -1,0 +1,202 @@
+---
+import { AFF_LINK, AFF_REL, AFF_TARGET, AFF_BUTTON_TEXT } from '../data/plans';
+---
+
+<section class="considerations-section" id="user-focus">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 决策参考
+      </div>
+      <h2 class="section-title">用户选购核心关注点</h2>
+      <p class="section-desc">
+        新用户在选择闪电猫 SpeedCAT 时最常关心的五个关键痛点梳理与客观建议。
+      </p>
+    </div>
+
+    <div class="considerations-grid">
+      <div class="card focus-card">
+        <div class="focus-header">
+          <span class="focus-icon">📊</span>
+          <h3 class="focus-title">1. 我的流量到底够不够用？</h3>
+        </div>
+        <p class="focus-body">
+          若只用于网页查阅、即时消息与技术文献，100GB/月的「迷你猫」完全足够；若每天观看 1–2 小时 1080P 视频，推荐 200GB/月的「闪电猫」；若追求 4K 超清并有多设备共用，建议 500GB/月「霹雳猫」。
+        </p>
+        <a href="/guides/speedcat-data/" class="focus-link">查看流量计算模型 →</a>
+      </div>
+
+      <div class="card focus-card">
+        <div class="focus-header">
+          <span class="focus-icon">⏳</span>
+          <h3 class="focus-title">2. 应该选月付还是年付？</h3>
+        </div>
+        <p class="focus-body">
+          初次使用建议先选择月付，以低成本验证本地宽带在晚高峰的表现。确信体验契合后，按年订购可获得明显折扣；若使用频次时断时续，年付专属「流星猫（600GB/年）」资金池更加灵活。
+        </p>
+        <a href="/guides/speedcat-plans/" class="focus-link">对比月付与年付细节 →</a>
+      </div>
+
+      <div class="card focus-card">
+        <div class="focus-header">
+          <span class="focus-icon">💻</span>
+          <h3 class="focus-title">3. 我的设备能否顺利配置？</h3>
+        </div>
+        <p class="focus-body">
+          闪电猫提供标准的通用订阅 URL，全面兼容 Windows（Clash Verge、ClashParty）、Android 及 iOS 平台。只需在对应客户端复制粘贴订阅地址即可拉取节点，无需繁琐的手动参数填报。
+        </p>
+        <a href="/guides/speedcat-windows/" class="focus-link">阅读客户端配置指南 →</a>
+      </div>
+
+      <div class="card focus-card">
+        <div class="focus-header">
+          <span class="focus-icon">🛰️</span>
+          <h3 class="focus-title">4. 如何确认节点连通是否健康？</h3>
+        </div>
+        <p class="focus-body">
+          连通性关键在于确保系统时钟精准同步以及分流规则正确加载。在客户端测试延迟并结合访问外部 IP 查询工具即可验证，遇到偶发报错时有清晰的五步自查清单可供参考。
+        </p>
+        <a href="/guides/speedcat-troubleshooting/" class="focus-link">查阅故障排错手册 →</a>
+      </div>
+
+      <div class="card focus-card">
+        <div class="focus-header">
+          <span class="focus-icon">🔍</span>
+          <h3 class="focus-title">5. 购买前必须核对的权益</h3>
+        </div>
+        <p class="focus-body">
+          由于本站展示的是公开参考资费，进入推广购买页面后，务必在结算前核对当前在售套餐名称、包含流量、计费周期与退款政策条款，确认无误再完成支付。
+        </p>
+        <a href="/faq/" class="focus-link">阅读常见问题答疑 →</a>
+      </div>
+    </div>
+
+    <div class="considerations-cta">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h3>准备好开启体验？</h3>
+          <p>前往指定合作推广入口，查看实时在售套餐与订阅规格。</p>
+        </div>
+        <a href={AFF_LINK} target={AFF_TARGET} rel={AFF_REL} class="btn btn-primary cta-btn">
+          {AFF_BUTTON_TEXT}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .considerations-section {
+    background: #0B1020;
+    padding-bottom: 5rem;
+  }
+
+  .considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .focus-card {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    background: #111827;
+  }
+
+  .focus-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .focus-icon {
+    font-size: 1.3rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  .focus-title {
+    font-size: 1.1rem;
+    color: #F8FAFC;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .focus-body {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .focus-link {
+    font-size: 0.85rem;
+    color: var(--color-cyan);
+    font-weight: 600;
+  }
+
+  .focus-link:hover {
+    color: #7DD3FC;
+    text-decoration: underline;
+  }
+
+  .considerations-cta {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(22, 32, 54, 0.95) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-text h3 {
+    font-size: 1.4rem;
+    color: #F8FAFC;
+    margin-bottom: 0.35rem;
+  }
+
+  .cta-text p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .cta-btn {
+    padding: 0.85rem 2rem;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .considerations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .considerations-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .cta-btn {
+      width: 100%;
+    }
+  }
+</style>

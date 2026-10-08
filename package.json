@@ -1,0 +1,16 @@
+{
+  "name": "iflashcat.mom",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node test-site.cjs && node check-links.cjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.7",
+    "typescript": "^7.0.2"
+  }
+}

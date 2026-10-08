@@ -1,0 +1,115 @@
+---
+---
+
+<section class="node-knowledge-section" id="nodes-intro">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 节点网络常识
+      </div>
+      <h2 class="section-title">闪电猫节点使用知识：科学理解延迟、带宽与线路</h2>
+      <p class="section-desc">
+        拒绝虚构测速数值与夸大宣称，客观认识跨境公网路由特性，掌握实用选路技巧。
+      </p>
+    </div>
+
+    <div class="node-cards-grid">
+      <div class="card node-card">
+        <div class="node-card-num">01</div>
+        <h3 class="node-card-title">延迟 ≠ 速度</h3>
+        <p class="node-card-desc">
+          Ping 测速反映的是数据包来回的往返物理耗时（毫秒），决定网页打开第一时间的响应瞬敏度；带宽吞吐量（Mbps）才决定大文件下载或 4K 视频的缓冲承载力。不可单纯以 Ping 判定节点品质。
+        </p>
+      </div>
+
+      <div class="card node-card">
+        <div class="card-icon-tag">02</div>
+        <h3 class="node-card-title">高峰期骨干网拥塞</h3>
+        <p class="node-card-desc">
+          在每晚 20:00–23:30 高峰期，国际出口公网信道拥堵加剧，丢包率往往比白昼有所波动。遇到偶发迟钝时，无需反复测速，建议在客户端内切换至其他冷门备用线路即可改善。
+        </p>
+      </div>
+
+      <div class="card node-card">
+        <div class="card-icon-tag">03</div>
+        <h3 class="node-card-title">按业务区域对标选路</h3>
+        <p class="node-card-desc">
+          访问中国香港、日本或新加坡节点具备物理光纤距离优势，适合日常网页搜索与交互；欧美节点虽然延迟数值偏高（通常 > 150ms），但国际带宽资源宽裕，适合大宗文件同步与特定开发源访问。
+        </p>
+      </div>
+
+      <div class="card node-card">
+        <div class="card-icon-tag">04</div>
+        <h3 class="node-card-title">规则分流减轻网络负荷</h3>
+        <p class="node-card-desc">
+          切勿长期开启“全局模式（Global）”。保持客户端在“规则模式（Rule）”，可使本地境内流量直接由家庭宽带直连，既不额外扣减闪电猫套餐流量，又可免去国内应用因代理 IP 导致的验证繁琐。
+        </p>
+      </div>
+    </div>
+
+    <div class="node-footer-link">
+      <a href="/guides/speedcat-nodes/" class="btn btn-outline btn-sm">
+        阅读完整的《闪电猫节点使用指南：延迟、速度与线路选择》 →
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .node-knowledge-section {
+    background: #0D1326;
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+  }
+
+  .node-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .node-card {
+    padding: 2rem 1.5rem;
+    background: #111A2E;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .node-card-num, .card-icon-tag {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-cyan);
+    margin-bottom: 0.85rem;
+    line-height: 1;
+  }
+
+  .node-card-title {
+    font-size: 1.15rem;
+    color: #F8FAFC;
+    margin-bottom: 0.65rem;
+  }
+
+  .node-card-desc {
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .node-footer-link {
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    .node-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .node-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

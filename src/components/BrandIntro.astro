@@ -1,0 +1,194 @@
+---
+import { AFF_LINK, AFF_REL, AFF_TARGET, AFF_BUTTON_TEXT } from '../data/plans';
+---
+
+<section class="brand-intro-section" id="brand-intro">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">
+        <span>⚡</span> 品牌专属介绍
+      </div>
+      <h2 class="section-title">聚焦闪电猫 SpeedCAT：极速科技与网络连接</h2>
+      <p class="section-desc">
+        本站只围绕「闪电猫 SpeedCAT」单一品牌进行信息梳理与技术解读，不做泛机场对比或无意义的竞品排行榜。
+      </p>
+    </div>
+
+    <div class="brand-grid">
+      <div class="card brand-card">
+        <div class="card-icon-wrap icon-cyan">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <h3 class="card-title">独立单品牌信息定位</h3>
+        <p class="card-text">
+          致力于为准备了解或已在使用闪电猫 SpeedCAT 的用户，提供公开参考套餐、周期资费、流量规则与网络节点选择常识，拒绝充斥冗余商业干扰的泛排行榜。
+        </p>
+      </div>
+
+      <div class="card brand-card">
+        <div class="card-icon-wrap icon-yellow">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <h3 class="card-title">全平台客户端协同生态</h3>
+        <p class="card-text">
+          兼容现代开源路由内核，支持在 Windows（Clash Verge、ClashParty）、Android、iOS 等主流操作系统中安全导入通用订阅链接并实施智能规则分流。
+        </p>
+      </div>
+
+      <div class="card brand-card">
+        <div class="card-icon-wrap icon-blue">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <h3 class="card-title">严谨客观的资料透明度</h3>
+        <p class="card-text">
+          不虚构节点带宽倍率、不夸大网络连通率、不编造未经核实的官方直营承诺。所有套餐数据忠实保留公开记录原貌，明确标注销售核验状态。
+        </p>
+      </div>
+    </div>
+
+    <div class="brand-notice-banner">
+      <div class="notice-icon">ℹ️</div>
+      <div class="notice-content">
+        <h4>指定合作推广入口核验说明</h4>
+        <p>
+          本站所包含的购买与注册按钮均统一指向指定合作推广入口。该推广入口与 SpeedCAT 服务提供方的实际销售关系尚未核实。本站非 SpeedCAT 官方直营网站，亦不承诺合作页面一定销售文中所有参考套餐，选购前请以结算平台实时显示为准。
+        </p>
+      </div>
+      <div class="notice-action">
+        <a href={AFF_LINK} target={AFF_TARGET} rel={AFF_REL} class="btn btn-secondary btn-sm">
+          {AFF_BUTTON_TEXT}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-intro-section {
+    background: linear-gradient(180deg, rgba(11, 16, 32, 0.4) 0%, rgba(17, 24, 39, 0.6) 100%);
+  }
+
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .brand-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .card-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-cyan {
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--color-cyan);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+
+  .icon-yellow {
+    background: rgba(255, 212, 59, 0.12);
+    color: var(--color-yellow);
+    border: 1px solid rgba(255, 212, 59, 0.3);
+  }
+
+  .icon-blue {
+    background: rgba(99, 102, 241, 0.12);
+    color: #818CF8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    color: var(--color-text-main);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .brand-notice-banner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(17, 24, 39, 0.9);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+  }
+
+  .notice-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .notice-content {
+    flex: 1;
+  }
+
+  .notice-content h4 {
+    font-size: 1.05rem;
+    color: var(--color-yellow);
+    margin-bottom: 0.35rem;
+  }
+
+  .notice-content p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .notice-action {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 960px) {
+    .brand-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .brand-notice-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+    }
+
+    .notice-action {
+      width: 100%;
+    }
+
+    .notice-action .btn {
+      width: 100%;
+    }
+  }
+</style>

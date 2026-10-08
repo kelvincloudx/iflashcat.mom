@@ -1,0 +1,322 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { SITE } from '../../data/site';
+import { AFF_LINK, AFF_REL, AFF_TARGET, AFF_BUTTON_TEXT } from '../../data/plans';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => {
+    const slug = guide.id.replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { guide, allGuides: guides },
+    };
+  });
+}
+
+const { guide, allGuides } = Astro.props;
+const { Content } = await render(guide);
+
+const slug = guide.id.replace(/\.md$/, '');
+const pageUrl = `${SITE.domain}/guides/${slug}/`;
+
+const breadcrumbItems = [
+  { name: '使用教程', url: '/guides/' },
+  { name: guide.data.title, url: `/guides/${slug}/` },
+];
+
+// Related guides (pick 2 other guides)
+const otherGuides = allGuides
+  .filter((g) => g.id !== guide.id)
+  .slice(0, 3)
+  .map((g) => ({
+    title: g.data.title,
+    url: `/guides/${g.id.replace(/\.md$/, '')}/`,
+    category: g.data.category,
+    readTime: g.data.readTime,
+  }));
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.data.title,
+  description: guide.data.description,
+  datePublished: guide.data.pubDate,
+  author: {
+    '@type': 'Organization',
+    name: '闪电猫 SpeedCAT 信息站',
+    url: SITE.domain,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '闪电猫 SpeedCAT 信息站',
+    url: SITE.domain,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': pageUrl,
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: SITE.domain,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: '使用教程',
+      item: `${SITE.domain}/guides/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: guide.data.title,
+      item: pageUrl,
+    },
+  ],
+};
+---
+
+<Layout
+  title={`${guide.data.title}｜闪电猫 SpeedCAT`}
+  description={guide.data.description}
+  canonical={pageUrl}
+  type="article"
+  keywords={guide.data.keywords}
+  pubDate={guide.data.pubDate}
+  schema={[breadcrumbSchema, articleSchema]}
+>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <article class="article-page-container">
+    <div class="container article-layout">
+      <!-- Article Header -->
+      <header class="article-header">
+        <div class="article-tags-row">
+          <span class="badge badge-cyan">{guide.data.category}</span>
+          <span class="article-read-meta">⏱️ 阅读时长：{guide.data.readTime}</span>
+          <span class="article-date-meta">📅 更新日期：{guide.data.pubDate}</span>
+        </div>
+
+        <h1 class="article-h1">{guide.data.title}</h1>
+
+        <div class="article-summary-box">
+          <div class="summary-label">核心提要</div>
+          <p class="summary-text">{guide.data.description}</p>
+        </div>
+      </header>
+
+      <!-- Main Prose Body -->
+      <div class="article-body prose">
+        <Content />
+      </div>
+
+      <!-- In-Article Conversion Banner -->
+      <section class="article-cta-box" aria-label="订阅服务入口">
+        <div class="cta-box-content">
+          <h3>前往闪电猫 SpeedCAT 指定合作推广入口</h3>
+          <p>
+            查看最新在售套餐配置与实时价格，获取专属通用订阅链接。公开参考价格与实际在售信息以最终结算平台为准。
+          </p>
+        </div>
+        <div class="cta-box-actions">
+          <a
+            href={AFF_LINK}
+            target={AFF_TARGET}
+            rel={AFF_REL}
+            class="btn btn-primary"
+          >
+            {AFF_BUTTON_TEXT}
+          </a>
+          <a href="/pricing/" class="btn btn-secondary">
+            查看参考套餐表
+          </a>
+        </div>
+      </section>
+
+      <!-- Related Guides Internal Links -->
+      <section class="related-guides-section">
+        <h3 class="related-section-title">相关推荐教程</h3>
+        <div class="related-grid">
+          {otherGuides.map((item) => (
+            <div class="card related-card">
+              <span class="badge badge-cyan">{item.category}</span>
+              <h4 class="related-title">
+                <a href={item.url}>{item.title}</a>
+              </h4>
+              <a href={item.url} class="related-link">
+                查看文章 →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .article-page-container {
+    padding: 1.5rem 0 4rem 0;
+  }
+
+  .article-layout {
+    max-width: 860px;
+  }
+
+  .article-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  }
+
+  .article-tags-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+
+  .article-read-meta,
+  .article-date-meta {
+    color: var(--color-text-dim);
+  }
+
+  .article-h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    line-height: 1.35;
+    color: #F8FAFC;
+    margin-bottom: 1.25rem;
+  }
+
+  .article-summary-box {
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-left: 4px solid var(--color-cyan);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .summary-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.05em;
+  }
+
+  .summary-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .article-body {
+    margin-bottom: 3.5rem;
+  }
+
+  .article-cta-box {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(22, 32, 54, 0.95) 100%);
+    border: 1px solid rgba(255, 212, 59, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    margin: 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .cta-box-content h3 {
+    font-size: 1.35rem;
+    color: #F8FAFC;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-box-content p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .cta-box-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .related-guides-section {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .related-section-title {
+    font-size: 1.3rem;
+    color: #F8FAFC;
+    margin-bottom: 1.5rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .related-card {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    background: #111827;
+  }
+
+  .related-title {
+    font-size: 0.98rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .related-title a {
+    color: #F8FAFC;
+  }
+
+  .related-title a:hover {
+    color: var(--color-cyan);
+  }
+
+  .related-link {
+    font-size: 0.82rem;
+    color: var(--color-cyan);
+    font-weight: 600;
+    margin-top: auto;
+  }
+
+  @media (max-width: 768px) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-box-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cta-box-actions .btn {
+      width: 100%;
+    }
+  }
+</style>
