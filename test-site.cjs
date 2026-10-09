@@ -191,11 +191,12 @@ const plansToCheck = [
   assert(html.includes('5000GB'), `${pageName} 包含飞天猫 5000GB 规则`);
   assert(html.includes('不按月重置') || html.includes('不按月清零'), `${pageName} 正确说明年付专属流量不按月重置`);
 
-  // 检查免责声明
+  // 检查免责声明已按用户要求移除
   assert(
-    html.includes('本页面展示的是 SpeedCAT 公开资料中的参考套餐') ||
-      html.includes('公开资料参考价格'),
-    `${pageName} 包含明确的价格参考与推广关系免责声明`
+    !html.includes('价格与销售关系透明度说明') &&
+      !html.includes('指定合作推广入口核验说明') &&
+      !html.includes('本站为闪电猫 SpeedCAT 套餐资料与使用指南页面，包含指定合作推广入口'),
+    `${pageName} 已按用户要求移除图一、图二、图三相关免责说明文字`
   );
 });
 

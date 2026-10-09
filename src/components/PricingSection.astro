@@ -6,7 +6,6 @@ import {
   AFF_REL,
   AFF_TARGET,
   AFF_BUTTON_TEXT,
-  PRICE_DISCLAIMER,
 } from '../data/plans';
 
 interface Props {
@@ -126,15 +125,6 @@ const { isPage = false } = Astro.props;
           </div>
         ))}
       </div>
-    </div>
-
-    <!-- Transparent Price Disclaimer Note -->
-    <div class="disclaimer-box pricing-disclaimer">
-      <div class="disclaimer-header">
-        <span class="disclaimer-icon">⚠️</span>
-        <strong>价格与销售关系透明度说明</strong>
-      </div>
-      <p>{PRICE_DISCLAIMER}</p>
     </div>
 
     <!-- Link to deep comparison if on homepage -->
